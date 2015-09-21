@@ -1,0 +1,38 @@
+<%= javascript_include_tag "twitter/bootstrap" %>
+<%= stylesheet_link_tag "bootstrap" %>
+<%= stylesheet_link_tag "bootstrap-responsive" %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.question-fancy-box').click(function () {
+            $.fancybox({
+                padding:10,
+                centerOnScroll:true,
+                hideOnOverlayClick:true,
+                'overlayShow':true,
+                'modal':true,
+                'enableEscapeButton':false,
+                'overlayOpacity':1,
+                'hideOnOverlayClick':false,
+                'type':'iframe',
+                'href':'/admin/jobs/create_question'
+
+            });
+
+        });
+
+
+    });
+
+
+</script>
+
+  <div id="settings_wrapper" ></div>
+<%= render 'form', url: admin_jobs_path %>
+<br/>
+<div :class ='control-group'>
+<%= link_to '<strong>Create Question</strong>'.html_safe, new_question_path, :remote => true, :class => 'btn btn-warning strong'  %>
+  </div>
+
+

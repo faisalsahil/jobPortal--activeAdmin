@@ -1,0 +1,36 @@
+<%= javascript_include_tag "twitter/bootstrap" %>
+<%= stylesheet_link_tag "bootstrap" %>
+<%= stylesheet_link_tag "bootstrap-responsive" %>
+
+<div class="control-group" xmlns="http://www.w3.org/1999/html">
+  <% index = 1 %>
+  <h3 class="panel"><strong>Questions</strong></h3>
+  <table class="table table-striped panel">
+    <thead>
+    <tr>
+      <th><strong>Sr.No</strong></th>
+      <th><strong>Question</strong></th>
+      <th><strong>Question Type</strong></th>
+      <th><strong>Question Required</strong></th>
+      <th><strong>Question Mandatory</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @job.questions.each do |question| %>
+        <tr>
+          <td><%= index %><%= ":" %></td>
+          <td><%= question.question_name %></td>
+          <% if question.question_type.blank? %>
+              <td><%= "NULL" %></td>
+          <% else %>
+              <td><%= question.question_type %></td>
+        <% end %>
+         <td><%= question.job_questions.find_by_job_id(@job.id).question_required  %></td>
+         <td><%= question.job_questions.find_by_job_id(@job.id).question_mandatory  %></td>
+          <% index = index+1 %>
+        </tr>
+    <% end %>
+    </tr>
+    </tbody>
+  </table>
+</div>

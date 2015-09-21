@@ -1,0 +1,6 @@
+<% if params[:job_id].present? %>
+   $("#settings_wrapper").html("<%= escape_javascript render 'form_modal', :url => job_questions_path(params[:job_id]) %>");
+<% else %>
+$("#settings_wrapper").html("<%= escape_javascript render 'form_modal', url:questions_path %>");
+<% end%>
+$("#new_modal").modal('show');

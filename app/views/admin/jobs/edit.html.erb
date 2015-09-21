@@ -1,0 +1,12 @@
+<%= javascript_include_tag "twitter/bootstrap" %>
+<%= stylesheet_link_tag "bootstrap" %>
+<%= stylesheet_link_tag "bootstrap-responsive" %>
+<script type="text/javascript">
+</script>
+
+<div id="settings_wrapper"></div>
+<%= render 'form', url: admin_job_path(@job) %>
+</br>
+<div :class='control-group'>
+  <%= link_to '<strong>Create Question</strong>'.html_safe, new_job_question_path(@job), :remote => true, :class => 'btn btn-warning strong' %>
+</div>

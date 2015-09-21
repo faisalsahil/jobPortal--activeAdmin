@@ -1,0 +1,35 @@
+<%= javascript_include_tag "twitter/bootstrap" %>
+<%= stylesheet_link_tag "bootstrap" %>
+<%= stylesheet_link_tag "bootstrap-responsive" %>
+<%#= stylesheet_link_tag "application" %>
+
+<div class="control-group" xmlns="http://www.w3.org/1999/html">
+
+  <h3 class="panel">Candidate details</h3>
+  <% index = 1 %>
+  <table class="table table-striped panel">
+    <thead>
+    <tr>
+      <th><strong>Name</strong></th>
+      <th><strong></stromg>Institution</strong></th>
+      <th><strong>Degree Name</strong></th>
+      <th><strong>Email</strong></th>
+      <th><strong>CGPA</strong></th>
+      <th><strong>Resume</strong></th>
+      <th><strong>Download Resume</strong></th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @candidate.name %></td>
+          <td><%= @candidate.institution %></td>
+          <td><%= @candidate.degree_name %></td>
+          <td><%= @candidate.email %></td>
+          <td><%= @candidate.cgpa %></td>
+          <td><%= @candidate.resume %></td>
+          <td><%=link_to 'Download',download_candidate_path(@candidate), :format => 'pdf' %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>

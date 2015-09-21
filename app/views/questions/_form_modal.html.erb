@@ -1,0 +1,33 @@
+<div id="new_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new question" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="new-Question" class="h3">New Question</h3>
+  </div>
+
+  <div class="modal-body">
+    <% puts url%>
+
+    <%= form_for @question, :url => url, :remote => true, :html => {:class => 'form-horizontal well'} do |question| %>
+        <div class="object_errors_at_update"></div>
+        <fieldset>
+          <div class="control-group">
+            <%= question.label :"Enter Question", :class => "control-label" %>
+            <div class="controls">
+              <%= question.text_field :question_name %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= question.label :"Select type", :class=>"control-label" %>
+            <div class="controls">
+              <%= question.select(:question_type, JOB_CONSTANT::Question_TYPE) %>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="modal-footer">
+          <%= question.submit "Save Changes", :class => 'btn btn-primary' %>
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    <% end %>
+  </div>
+</div>

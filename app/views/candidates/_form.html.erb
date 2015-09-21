@@ -1,0 +1,75 @@
+<%= form_for @candidate, :url => job_candidates_path(@job), :html => {:class => 'form-horizontal'} do |f| %>
+    <dl class="dl-horizontal">
+      <div class="control-group">
+
+        <%= f.label :name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :degree_name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :degree_name, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :institution, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :institution, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :email, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :email, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :cgpa, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.number_field :cgpa, :class => 'number_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :UploadResume, "Upload resume".html_safe, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.file_field :resume %>
+        </div>
+      </div>
+      <div class="page-header">
+        <h3>Work & Experience</h3>
+      </div>
+      <table>
+        <tbody>
+        <%= f.fields_for :answers do |answer_form| %>
+            <tr>
+              <% if answer_form.object.question.job_questions.find_by_job_id(@job.id).question_required==true %>
+                  <td><%= answer_form.label "#{answer_form.object.question.question_name}", :class => 'control-label' %></td>
+                  <% if answer_form.object.question.job_questions.find_by_job_id(@job.id) %>
+                      <td><%= answer_form.label :"*", :class => 'label_color' %></td>
+                  <% end %>
+                  <% if answer_form.object.question.question_type== 'boolean' %>
+                      <td><%= answer_form.check_box :answer %></td>
+                  <% elsif answer_form.object.question.question_type== 'integer' %>
+                      <td><%= answer_form.number_field :answer %></td>
+                  <% elsif answer_form.object.question.question_type== 'text' %>
+                      <td><%= answer_form.text_field :answer %></td>
+                  <% else %>
+                      <td><%= answer_form.text_field :answer %></td>
+                  <% end %>
+                  <%= answer_form.hidden_field :question_id, :value => answer_form.object.question_id %>
+              <% end %>
+
+
+            <%# end %>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="form-actions">
+        <%= f.submit nil, :class => 'btn btn-primary', :value=>"Apply" %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    jobs_path, :class => 'btn' %>
+      </div>
+    </dl>
+<% end %>

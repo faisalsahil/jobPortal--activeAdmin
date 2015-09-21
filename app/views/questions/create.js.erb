@@ -1,0 +1,22 @@
+<% if @question.errors.any? %>
+<% errors = ""; %>
+<% @question.errors.full_messages.each do |error| %>
+<% errors = errors+"<li>#{error}</li>" %>
+<% end %>
+$(".object_errors_at_update").html("<div class = 'alert alert-error'><ul><%= raw(errors) %></ul></div>");
+<% else %>
+    <% if params[:job_id].present?%>
+    //    window.location.href += "?job_title";
+        window.location.reload();
+    //    $("#<%#= @stack.id %>-stack-name-holder").html("<%#= @stack.name %>");
+    <% else %>
+        $("#new_modal").modal('hide');
+        var job_title = $("#job_title").val();
+        var job_salary = $("#job_salary").val();
+        var job_description = $("#job_description").val();
+        var category = $("#job_category").val();
+        var department = $("#job_deparment").val();
+        var location = $("#job_location").val();
+        window.location.href = window.location.href + "?job_title=" + job_title + "&job_salary=" + job_salary + "&job_description=" + job_description + "&job_department=" + department + "&job_category=" + category + "&job_location=" + location;
+    <% end%>
+<% end %>

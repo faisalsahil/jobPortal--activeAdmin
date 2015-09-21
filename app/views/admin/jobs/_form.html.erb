@@ -1,0 +1,95 @@
+<%= form_for @job, :url => url, :html => {:class => 'form-horizontal', :id => "form"} do |f| %>
+    <%# f.semantic_errors *f.object.errors.keys %>
+    <% if @job.errors.any? %>
+        <div id="errorExplanation">
+          <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+          <ul>
+            <% @job.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :title, :class => 'control-label' %>
+      <div class="controls">
+        <% if params[:job_title].present? %>
+            <%= f.text_field :title, :class => 'text_field', :value => params[:job_title] %>
+        <% else %>
+            <%= f.text_field :title, :class => 'text_field', :placeholder => "Enter tile" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Category, :class => 'control-label' %>
+      <div class="controls">
+        <% if params[:job_category].present? %>
+            <%= f.select(:category, JOB_CONSTANT::CATEGORY_TYPE) %>
+        <% else %>
+            <%= f.select(:category, JOB_CONSTANT::CATEGORY_TYPE) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Department, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:department, JOB_CONSTANT::DEPARTMENT_TYPE) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Location, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:location, JOB_CONSTANT::JOB_TYPE) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :SalaryRange, :class => 'control-label' %>
+      <div class="controls">
+        <% if params[:job_salary].present? %>
+            <%= f.text_field :salary, :class => 'text_field', :value => params[:job_salary] %>
+        <% else %>
+            <%= f.text_field :salary, :class => 'text_field' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Description, :class => "control-label" %>
+      <div class="controls">
+        <% if params[:job_description].present? %>
+            <%= f.text_area :description, :class => 'textarea', :value => params[:job_description], input_html: {class: 'redactor'}, :placeholder => "write description here" %>
+        <% else %>
+            <%= f.text_area :description, :class => 'textarea', input_html: {class: 'redactor'}, :placeholder => "write description here" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="back-ground">
+      <h2><%= f.label :"Questions" %></h2>
+    </div>
+    <%= f.fields_for :job_questions do |q| %>
+        <div class="control-group">
+          <% if q.object.question.question_name.blank? %>
+          <% else %>
+
+              <%= q.label "#{q.object.question.question_name}" %>
+              <%= image_tag "smallTick.gif", :alt => "Go Home", :class => 'nav_bar' %>
+              <%= q.check_box :question_required %>
+              <%= image_tag "required-icon.png", :alt => "Go Home", :class => 'nav_bar' %>
+              <%= q.check_box :question_mandatory %>
+              <%= q.hidden_field :question_id, :value => q.object.question_id %>
+          <% end %>
+
+        </div>
+    <% end %>
+
+
+
+
+    <%= f.submit %>
+
+<% end %>

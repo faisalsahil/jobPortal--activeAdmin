@@ -1,0 +1,85 @@
+<%= form_for @job, :url => admin_jobs_path, :html => {:class => 'form-horizontal'} do |f| %>
+
+    <div class="control-group">
+      <%= f.label :title, :class => 'control-label' %>
+      <%= f.text_field :title, :class => 'text_field' %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Category, :class => 'control-label' %>
+      <%= f.select(:category, JOB_CONSTANT::CATEGORY_TYPE) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Department, :class => 'control-label' %>
+      <%= f.select(:department, JOB_CONSTANT::DEPARTMENT_TYPE) %>
+
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Location, :class => 'control-label' %>
+      <%= f.select(:location, JOB_CONSTANT::JOB_TYPE) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :SalaryRange, :class => 'control-label' %>
+      <%= f.text_field :salary, :class => 'text_field' %>
+    </div>
+    <div class="control-group">
+      <%= f.label :Description, :class => 'control-label' %>
+      <%= f.text_area :description, :class => 'text_area',input_html:{class: 'redactor'}%>
+    </div>
+    <%= form_for @job, :url => admin_jobs_path, :html => {:class => 'form-horizontal'} do |f| %>
+
+        <div class="control-group">
+          <%= f.label :title, :class => 'control-label' %>
+          <%= f.text_field :title, :class => 'text_field' %>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :Category, :class => 'control-label' %>
+          <%= f.select(:category, JOB_CONSTANT::CATEGORY_TYPE) %>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :Department, :class => 'control-label' %>
+          <%= f.select(:department, JOB_CONSTANT::DEPARTMENT_TYPE) %>
+
+        </div>
+
+        <div class="control-group">
+          <%= f.label :Location, :class => 'control-label' %>
+          <%= f.select(:location, JOB_CONSTANT::JOB_TYPE) %>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :SalaryRange, :class => 'control-label' %>
+          <%= f.text_field :salary, :class => 'text_field' %>
+        </div>
+        <div class="control-group">
+          <%= f.label :Description, :class => 'control-label' %>
+          <%= f.text_area :description, :class => 'text_area',input_html:{class: 'redactor'}%>
+        </div>
+
+        <div class="control-group">
+          <h3><%=f.label :"Questions" %></h3>
+          <%= f.fields_for :job_questions do |q| %>
+
+              <div class="control-group">
+                <%= q.label :"#{@arr[@index]}", :class => 'control-label' %>
+                <%= q.check_box :question_required %>
+                <%= q.hidden_field :question_id, :value => @job_questions[@index].question_id %>
+                <% @index = @index+1 %>
+              </div>
+
+          <% end %>
+        </div>
+
+
+        <%= f.submit %>
+    <% end %>
+
+
+
+    <%= f.submit %>
+<% end %>
